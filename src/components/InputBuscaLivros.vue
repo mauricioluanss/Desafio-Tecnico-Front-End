@@ -1,14 +1,11 @@
 <!--
 Como usuário gostaria de digitar algumas palavras e ver uma lista de
 livros que tenhas relação com a minha busca.
-
-1 - fazer o formulario para pesquisar
-2 - testar get na api pra buscar resultado da pesquisa quando clicar no botao
 -->
 <template>
   <form>
     <input v-model="pesquisa" type="text" placeholder="Digite algo: ">
-    <button type="button" @click="requisicao(pesquisa)">pesquisar</button>
+    <button type="button" @click="buscaLivros">Buscar</button>
   </form>
 </template>
 
@@ -21,31 +18,21 @@ export default {
       pesquisa: '',
     }
   },
-
   props: {},
-
+  computed: {},
+  watch: {},
   methods: {
-    resultadoPesquisa() {
-      console.log(this.pesquisa);
-    },
     // get para retornar o resultado da pesquisa
-    requisicao(search) {
+    buscaLivros() {
       const chamaApi = axios
-        .get(`https://www.googleapis.com/books/v1/volumes?q=${search}`)
+        .get(`https://www.googleapis.com/books/v1/volumes?q=${this.pesquisa}`)
         .then((res) => {
-          console.log(res.data)
+          console.log(res.data) //mudar para salvar o resultado no data
         })
         .catch((error) => {
-          console.log(error);
+          console.log(error); // exibir mensagem de erro na tela, talvez
         });
       return chamaApi;
-    }
-  },
-  computed: {},
-
-  watch: {
-    pesquisa() {
-
     }
   },
 }
