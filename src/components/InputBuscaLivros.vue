@@ -41,6 +41,7 @@ export default {
         .then((res) => {
           if (res.data.items) {
             this.resultadoPesquisa = res.data.items // salva apenas o objeto 'items' e seus dados.
+            console.log(this.resultadoPesquisa)
           } else {
             this.resultadoPesquisa = []
           }
