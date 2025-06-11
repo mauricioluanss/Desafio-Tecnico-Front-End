@@ -4,8 +4,8 @@ livros que tenhas relação com a minha busca.
 -->
 <template>
   <form>
-    <input v-model="pesquisa" type="text" placeholder="Digite algo: " />
-    <button type="button" @click="buscaLivros">Buscar</button>
+    <input v-model="pesquisa" type="text" placeholder="Digite 3 letras ou mais: " />
+    <!--<button type="button" @click="buscaLivros">Buscar</button> - removi pois usei a funcionalidade do watch-->
 
     <!--laço para mandar cada livro para dentro do component card.-->
     <ul>
@@ -36,12 +36,24 @@ export default {
 
   computed: {},
 
-  watch: {},
+  watch: {
+    pesquisa() {
+      console.log(this.pesquisa) //debug
+      if (this.pesquisa.length > 3) {
+        console.log(this.pesquisa) //debug
+        this.buscaLivros() //chama a funcao de busca
+      }
+    },
+  },
 
   methods: {
     async buscaLivros() {
-      this.resultadoPesquisa = await requisicao(this.pesquisa)
-      console.log(this.pesquisa) // debug
+      try {
+        this.resultadoPesquisa = await requisicao(this.pesquisa)
+        console.log(this.resultadoPesquisa) // debug
+      } catch (erro) {
+        console.log(erro)
+      }
     },
   },
 }

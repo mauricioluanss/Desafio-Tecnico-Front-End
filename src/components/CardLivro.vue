@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img :src="thumbnail" alt="capa" />
+    <!--<img :src="thumbnail" alt="capa" />-->
     {{ titulo }} - {{ autor }}
   </div>
 </template>
@@ -20,14 +20,18 @@ export default {
   },
 
   computed: {
-    thumbnail() {
+    /* thumbnail() {
       return this.livro.volumeInfo.imageLinks.thumbnail
-    },
+    }, */
     titulo() {
       return this.livro.volumeInfo.title
     },
     autor() {
-      return this.livro.volumeInfo.authors[0]
+      if (this.livro.volumeInfo.authors) {
+        return this.livro.volumeInfo.authors.join(', ')
+      } else {
+        return "autor(res) não encontrado(s)"
+      }
     },
   },
 }
