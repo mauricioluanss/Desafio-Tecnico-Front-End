@@ -47,6 +47,7 @@ export default {
   },
 
   methods: {
+    // futuramente colocar um timeout entre o tempo que o usuario digita e a requisicao executa !!!!!!!!
     async buscaLivros() {
       try {
         this.resultadoPesquisa = await requisicao(this.pesquisa)

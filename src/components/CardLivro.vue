@@ -1,8 +1,7 @@
 <template>
-  <div>
-    <!--<img :src="thumbnail" alt="capa" />-->
-    {{ titulo }} - {{ autor }}
-  </div>
+  <span>
+    <img :src="thumbnail" alt="capa" />{{ titulo }} - {{ autor }} - {{ publishedDate }}
+  </span>
 </template>
 
 <script>
@@ -20,19 +19,35 @@ export default {
   },
 
   computed: {
-    /* thumbnail() {
-      return this.livro.volumeInfo.imageLinks.thumbnail
-    }, */
+    thumbnail() {
+      if (this.livro.volumeInfo.imageLinks.thumbnail) {
+        return this.livro.volumeInfo.imageLinks.thumbnail
+      } else {
+        return "https://placehold.co/60x40"
+      }
+    },
     titulo() {
-      return this.livro.volumeInfo.title
+      if (this.livro.volumeInfo.title) {
+        return this.livro.volumeInfo.title
+      } else {
+        return "titulo não encontrado."
+      }
     },
     autor() {
       if (this.livro.volumeInfo.authors) {
         return this.livro.volumeInfo.authors.join(', ')
       } else {
-        return "autor(res) não encontrado(s)"
+        return "autor não encontrado."
       }
     },
+
+    publishedDate() {
+      if (this.livro.volumeInfo.publishedDate) {
+        return this.livro.volumeInfo.publishedDate
+      } else {
+        return "ano de publicação não encontrado."
+      }
+    }
   },
 }
 </script>
