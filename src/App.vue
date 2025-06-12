@@ -1,14 +1,23 @@
 <template>
-  <PgBuscaLivros />
+  <header>
+    <nav></nav>
+  </header>
+
+  <main>
+    <RouterView />
+  </main>
+
+  <footer></footer>
 </template>
 
 <script>
-import PgBuscaLivros from './views/PgBuscaLivros.vue';
+import { /*RouterLink,*/ RouterView } from 'vue-router'
 
 export default {
   components: {
-    PgBuscaLivros
-  }
+    //RouterLink,
+    RouterView,
+  },
 }
 </script>
 <style scoped></style>

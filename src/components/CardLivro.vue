@@ -1,7 +1,9 @@
 <template>
-  <span>
-    <img :src="thumbnail" alt="capa" />{{ titulo }} - {{ autor }} - {{ publishedDate }}
-  </span>
+  <div>
+    <RouterLink :to="`/livro/${livro.id}`">
+      <img :src="thumbnail" alt="capa" />{{ titulo }} - {{ autor }} - {{ publishedDate }}
+    </RouterLink>
+  </div>
 </template>
 
 <script>
@@ -19,6 +21,9 @@ export default {
   },
 
   computed: {
+    idLivro() {
+      return this.livro.id
+    },
     thumbnail() {
       if (this.livro.volumeInfo.imageLinks.thumbnail) {
         return this.livro.volumeInfo.imageLinks.thumbnail

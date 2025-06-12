@@ -4,8 +4,8 @@ livros que tenhas relação com a minha busca.
 -->
 <template>
   <form>
+    <h3>PESQUISE O LIVRO</h3>
     <input v-model="pesquisa" type="text" placeholder="Digite 3 letras ou mais: " />
-    <!--<button type="button" @click="buscaLivros">Buscar</button> - removi pois usei a funcionalidade do watch-->
 
     <!--laço para mandar cada livro para dentro do component card.-->
     <ul>
