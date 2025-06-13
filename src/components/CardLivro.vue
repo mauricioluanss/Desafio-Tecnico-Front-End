@@ -25,10 +25,11 @@ export default {
       return this.livro.id
     }, */
     thumbnail() {
-      if (this.livro.volumeInfo.imageLinks.thumbnail) {
+      // INSERIR LÓGICA PARA VALIDAR SE EXISTE A PROPRIEADE imageLinks !!!!!!!!!!!!!!!
+      if (this.livro.volumeInfo.imageLinks?.thumbnail) {
         return this.livro.volumeInfo.imageLinks.thumbnail
       } else {
-        return "https://placehold.co/60x40"
+        return "https://placehold.co/130x180"
       }
     },
     titulo() {
