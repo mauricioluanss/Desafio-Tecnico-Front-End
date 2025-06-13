@@ -21,9 +21,9 @@ export default {
   },
 
   computed: {
-    idLivro() {
+    /* idLivro() {
       return this.livro.id
-    },
+    }, */
     thumbnail() {
       if (this.livro.volumeInfo.imageLinks.thumbnail) {
         return this.livro.volumeInfo.imageLinks.thumbnail
@@ -40,7 +40,7 @@ export default {
     },
     autor() {
       if (this.livro.volumeInfo.authors) {
-        return this.livro.volumeInfo.authors.join(', ')
+        return this.livro.volumeInfo.authors.join(', ') // imprime os valores do array separados por ,
       } else {
         return "autor não encontrado."
       }
@@ -56,8 +56,4 @@ export default {
   },
 }
 </script>
-<style>
-div {
-  background: wheat;
-}
-</style>
+<style></style>
