@@ -10,6 +10,10 @@
       </li>
     </ul>
   </form>
+  <div>
+    <button :disabled="pagAtual === 1" @click="paginaAnterior">anterior</button>
+    <button @click="proximaPagina">proxima</button>
+  </div>
 </template>
 
 <script>
@@ -25,12 +29,18 @@ export default {
     return {
       pesquisa: '',
       resultadoPesquisa: [],
+      pagAtual: 1,
+      resultadosPorPag: 10,
     }
   },
 
   props: {},
 
-  computed: {},
+  computed: {
+    startIndex() {
+      return ((this.pagAtual - 1) * this.resultadosPorPag)
+    }
+  },
 
   watch: {
     pesquisa() {
@@ -45,11 +55,21 @@ export default {
     // futuramente colocar um timeout entre o tempo que o usuario digita e a requisicao executa !!!!!!!!
     async buscaLivros() {
       try {
-        this.resultadoPesquisa = await requisicao(this.pesquisa)
+        this.resultadoPesquisa = await requisicao(this.pesquisa, this.startIndex)
         console.log(this.resultadoPesquisa) // debug
       } catch (erro) {
         console.log(erro)
       }
+    },
+
+    proximaPagina() {
+      this.pagAtual += 1
+      this.buscaLivros()
+    },
+
+    paginaAnterior() {
+      this.pagAtual -= 1
+      this.buscaLivros()
     },
   },
 }
