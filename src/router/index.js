@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import PgBuscaLivros from '@/views/PgBuscaLivros.vue'
 import DetalhesCardLivro from '@/views/DetalhesCardLivro.vue'
+import PagFavoritos from '@/views/PagFavoritos.vue'
 
 const routes = [
   {
@@ -12,6 +13,11 @@ const routes = [
     path: '/livro/:id', // : é pra eu joar o id do livro depois
     name: 'detalhes-livro',
     component: DetalhesCardLivro,
+  },
+  {
+    path: '/favoritos',
+    name: 'livros-favoritos',
+    component: PagFavoritos,
   },
 ]
 

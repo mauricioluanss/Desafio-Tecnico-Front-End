@@ -1,6 +1,9 @@
 <template>
   <header>
-    <nav></nav>
+    <nav>
+      <RouterLink to="/">pagina inicial</RouterLink>
+      <RouterLink to="/favoritos">favoritos</RouterLink>
+    </nav>
   </header>
 
   <main>
@@ -11,11 +14,12 @@
 </template>
 
 <script>
-import { RouterView } from 'vue-router';
+import { RouterView, RouterLink } from 'vue-router';
 
 export default {
   components: {
     RouterView,
+    RouterLink
   },
 }
 </script>

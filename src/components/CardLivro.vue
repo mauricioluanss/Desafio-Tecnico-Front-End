@@ -1,7 +1,9 @@
 <template>
   <div>
     <RouterLink :to="`/livro/${livro.id}`">
-      <img :src="thumbnail" alt="capa" />{{ titulo }} - {{ autor }} - {{ publishedDate }}
+      <img :src="thumbnail" alt="capa" />
+      <p v-if="titulo">Titulo: {{ titulo }}</p>
+      <p v-if="autor">Autor: {{ autor }}</p>
     </RouterLink>
   </div>
 </template>
@@ -21,39 +23,29 @@ export default {
   },
 
   computed: {
-    /* idLivro() {
-      return this.livro.id
-    }, */
     thumbnail() {
-      // INSERIR LÓGICA PARA VALIDAR SE EXISTE A PROPRIEADE imageLinks !!!!!!!!!!!!!!!
       if (this.livro.volumeInfo.imageLinks?.thumbnail) {
         return this.livro.volumeInfo.imageLinks.thumbnail
       } else {
         return "https://placehold.co/130x180"
       }
     },
+
     titulo() {
       if (this.livro.volumeInfo.title) {
         return this.livro.volumeInfo.title
       } else {
-        return "titulo não encontrado."
+        return null
       }
     },
+
     autor() {
       if (this.livro.volumeInfo.authors) {
         return this.livro.volumeInfo.authors.join(', ') // imprime os valores do array separados por ,
       } else {
-        return "autor não encontrado."
+        return null
       }
     },
-
-    publishedDate() {
-      if (this.livro.volumeInfo.publishedDate) {
-        return this.livro.volumeInfo.publishedDate
-      } else {
-        return "ano de publicação não encontrado."
-      }
-    }
   },
 }
 </script>

@@ -1,7 +1,3 @@
-<!--
-Como usuário gostaria de digitar algumas palavras e ver uma lista de
-livros que tenhas relação com a minha busca.
--->
 <template>
   <form>
     <h3>PESQUISE O LIVRO</h3>
@@ -38,8 +34,7 @@ export default {
 
   watch: {
     pesquisa() {
-      console.log(this.pesquisa) //debug
-      if (this.pesquisa.length > 3) {
+      if (this.pesquisa.length > 2) {
         console.log(this.pesquisa) //debug
         this.buscaLivros() //chama a funcao de busca
       }
