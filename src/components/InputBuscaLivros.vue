@@ -5,8 +5,8 @@
 
     <!--laço para mandar cada obj livro para dentro do component filho, e lá mostrar na tela.-->
     <ul>
-      <li v-for="item in livrosEncontrados" :key="item.id">
-        <CardLivro :livro="item" />
+      <li v-for="livro in livrosEncontrados" :key="livro.id">
+        <CardLivro :livro="livro" />
       </li>
     </ul>
   </form>
