@@ -6,7 +6,7 @@ import InputBuscaLivros from '@/components/InputBuscaLivros.vue';
 
 export default {
   components: {
-    InputBuscaLivros
+    InputBuscaLivros,
   }
 }
 </script>

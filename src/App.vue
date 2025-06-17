@@ -1,6 +1,7 @@
 <template>
   <header>
     <nav>
+      <RouterLink to="/">home</RouterLink>
       <RouterLink to="/favoritos">favoritos</RouterLink>
     </nav>
   </header>

@@ -1,31 +1,25 @@
 <template>
-  <header>
-    <nav>
-      <RouterLink to="/">pagina inicial</RouterLink>
-    </nav>
-  </header>
+  <h3>FAVORITOS</h3>
+
   <ul>
-    <h3>FAVORITOS</h3>
-    <li v-for="item in livrosFavoritos" :key="item.id">
-      <CardLivro :livro="item" />
+    <li v-for="livroFavorito in livrosFavoritos" :key="livroFavorito.id">
+      <CardLivro :livro="livroFavorito" />
     </li>
   </ul>
 </template>
 
 <script>
-import CardLivro from '@/components/CardLivro.vue';
-import { RouterLink } from 'vue-router';
+import CardLivro from '@/components/CardLivro.vue'
 
 export default {
   components: {
     CardLivro,
-    RouterLink
   },
 
   computed: {
     livrosFavoritos() {
       return this.$store.getters.retornaFavoritos
-    }
+    },
   },
 }
 </script>

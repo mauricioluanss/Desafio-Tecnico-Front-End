@@ -13,14 +13,14 @@
 
   <!-- botoes de paginacao -->
   <div>
-    <button :disabled="pagAtual === 1" @click="paginaAnterior">anterior</button>
-    <button :disabled="desabilitaProximaPag" @click="proximaPagina">proxima</button>
+    <button :disabled="paginaAtual === 1" @click="paginaAnterior">Anterior</button>
+    <button :disabled="desabilitaProximaPag" @click="proximaPagina">Proxima</button>
   </div>
 </template>
 
 <script>
 import CardLivro from './CardLivro.vue'
-import { requisicao } from '@/api/requisicao'
+import { pesquisaGeral } from '@/api/pesquisa-geral'
 
 export default {
   components: {
@@ -31,28 +31,30 @@ export default {
     return {
       input: '',
       livrosEncontrados: [],
-      pagAtual: 1,
-      resultadosPorPag: 10,
+      paginaAtual: 1,
+      itensPorPagina: 5,
       totalResultados: 0,
+      searchTimeout: null,
     }
   },
 
   computed: {
     startIndex() {
-      return ((this.pagAtual - 1) * this.resultadosPorPag)
+      return (this.paginaAtual - 1) * this.itensPorPagina
     },
 
     desabilitaProximaPag() {
-      return (this.pagAtual * this.resultadosPorPag >= this.totalResultados)
-    }
+      return this.paginaAtual * this.itensPorPagina >= this.totalResultados
+    },
   },
 
   watch: {
     // chama a requisicao a api a cada 3 caracteres digitados
     input() {
+      clearTimeout(this.searchTimeout)
+
       if (this.input.length > 2) {
-        console.log(this.input) //debug
-        this.consultarLivros() //chama a funcao de busca
+        this.searchTimeout = setTimeout(() => this.consultarLivros(), 500)
       }
     },
   },
@@ -61,22 +63,22 @@ export default {
     // futuramente colocar um timeout entre o tempo que o usuario digita e a requisicao é chamada !!!!!!!!
     async consultarLivros() {
       try {
-        const resposta = await requisicao(this.input, this.startIndex)
+        const resposta = await pesquisaGeral(this.input, this.startIndex, this.itensPorPagina)
         this.livrosEncontrados = resposta.items
         this.totalResultados = resposta.totalItems
-        console.log(this.livrosEncontrados) // debug
+        console.log(this.livrosEncontrados) // debug - visualizar a resposta da api
       } catch (erro) {
         console.log(erro)
       }
     },
 
     proximaPagina() {
-      this.pagAtual += 1
+      this.paginaAtual += 1
       this.consultarLivros()
     },
 
     paginaAnterior() {
-      this.pagAtual -= 1
+      this.paginaAtual -= 1
       this.consultarLivros()
     },
   },

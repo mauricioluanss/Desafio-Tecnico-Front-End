@@ -1,7 +1,4 @@
 <template>
-  <header>
-  </header>
-
   <div v-if="detalhesLivro != null">
     <h1>{{ titulo }}</h1>
     <img :src="thumbnail" alt="capa do livro" /> <br />
@@ -14,13 +11,12 @@
   </div>
 
   <div>
-    <button @click="favoritar">{{ !ehFavorito ? 'Favoritar' : 'Remover dos favoritos' }}
-    </button>
+    <button @click="favoritar">{{ !ehFavorito ? 'Favoritar' : 'Remover dos favoritos' }}</button>
   </div>
 </template>
 
 <script>
-import { requisicao } from '@/api/detalhes-livro'
+import { pesquisaPorId } from '@/api/pesquisa-por-id'
 
 export default {
   data() {
@@ -45,7 +41,7 @@ export default {
     },
 
     autores() {
-      return this.detalhesLivro.volumeInfo?.authors /* .join(', ') */ || 'Autor não encontrado.'
+      return this.detalhesLivro.volumeInfo?.authors?.join(', ') || 'Autores não encontrados.'
     },
 
     editora() {
@@ -61,33 +57,24 @@ export default {
     },
 
     categorias() {
-      return (
-        this.detalhesLivro.volumeInfo?.categories /* .join(' - ')*/ || 'Categorias não encontradas.'
-      )
+      return this.detalhesLivro.volumeInfo?.categories?.join(' / ') || 'Categorias não encontradas.'
     },
 
     descricao() {
       return this.detalhesLivro.volumeInfo?.description || 'Descrição não encontrada.'
     },
 
+    // verifica se o livro atual já está salvo no state
     ehFavorito() {
-      const favoritos = this.$store.getters.retornaFavoritos;
-      const idAtual = this.idLivro;
-      return favoritos.some((livro) => {
-        if (livro.id === idAtual) {
-          return true
-        } else {
-          return false
-        }
-      })
-    }
+      const favoritos = this.$store.getters.retornaFavoritos
+      return favoritos.some((livro) => livro.id === this.idLivro)
+    },
   },
 
   methods: {
-    // realiza a requisicao para a api com o parâmetro do id do livro
     async retornaDetalhesLivro() {
       try {
-        this.detalhesLivro = await requisicao(this.idLivro)
+        this.detalhesLivro = await pesquisaPorId(this.idLivro)
         console.log(this.detalhesLivro) //debug
       } catch (erro) {
         console.error(erro)
@@ -97,11 +84,12 @@ export default {
     favoritar() {
       if (!this.ehFavorito) {
         this.$store.dispatch('ChamaAdicionarFavorito', this.detalhesLivro)
+        console.log('adiconado')
       } else {
         this.$store.dispatch('ChamaRemoverFavorito', this.detalhesLivro)
-        console.log("Este livro já é favorito!")
+        console.log('removido')
       }
-    }
+    },
   },
 }
 </script>
