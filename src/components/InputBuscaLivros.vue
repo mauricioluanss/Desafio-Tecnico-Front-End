@@ -1,18 +1,20 @@
 <template>
   <form>
     <h3>PESQUISE O LIVRO</h3>
-    <input v-model="pesquisa" type="text" placeholder="Digite 3 letras ou mais: " />
+    <input v-model="input" type="text" placeholder="Digite 3 letras ou mais: " />
 
-    <!--laço para mandar cada livro para dentro do component card.-->
+    <!--laço para mandar cada obj livro para dentro do component filho, e lá mostrar na tela.-->
     <ul>
-      <li v-for="item in resultadoPesquisa" :key="item.id">
+      <li v-for="item in livrosEncontrados" :key="item.id">
         <CardLivro :livro="item" />
       </li>
     </ul>
   </form>
+
+  <!-- botoes de paginacao -->
   <div>
     <button :disabled="pagAtual === 1" @click="paginaAnterior">anterior</button>
-    <button @click="proximaPagina">proxima</button>
+    <button :disabled="desabilitaProximaPag" @click="proximaPagina">proxima</button>
   </div>
 </template>
 
@@ -27,36 +29,42 @@ export default {
 
   data() {
     return {
-      pesquisa: '',
-      resultadoPesquisa: [],
+      input: '',
+      livrosEncontrados: [],
       pagAtual: 1,
       resultadosPorPag: 10,
+      totalResultados: 0,
     }
   },
-
-  props: {},
 
   computed: {
     startIndex() {
       return ((this.pagAtual - 1) * this.resultadosPorPag)
+    },
+
+    desabilitaProximaPag() {
+      return (this.pagAtual * this.resultadosPorPag >= this.totalResultados)
     }
   },
 
   watch: {
-    pesquisa() {
-      if (this.pesquisa.length > 2) {
-        console.log(this.pesquisa) //debug
-        this.buscaLivros() //chama a funcao de busca
+    // chama a requisicao a api a cada 3 caracteres digitados
+    input() {
+      if (this.input.length > 2) {
+        console.log(this.input) //debug
+        this.consultarLivros() //chama a funcao de busca
       }
     },
   },
 
   methods: {
-    // futuramente colocar um timeout entre o tempo que o usuario digita e a requisicao executa !!!!!!!!
-    async buscaLivros() {
+    // futuramente colocar um timeout entre o tempo que o usuario digita e a requisicao é chamada !!!!!!!!
+    async consultarLivros() {
       try {
-        this.resultadoPesquisa = await requisicao(this.pesquisa, this.startIndex)
-        console.log(this.resultadoPesquisa) // debug
+        const resposta = await requisicao(this.input, this.startIndex)
+        this.livrosEncontrados = resposta.items
+        this.totalResultados = resposta.totalItems
+        console.log(this.livrosEncontrados) // debug
       } catch (erro) {
         console.log(erro)
       }
@@ -64,12 +72,12 @@ export default {
 
     proximaPagina() {
       this.pagAtual += 1
-      this.buscaLivros()
+      this.consultarLivros()
     },
 
     paginaAnterior() {
       this.pagAtual -= 1
-      this.buscaLivros()
+      this.consultarLivros()
     },
   },
 }

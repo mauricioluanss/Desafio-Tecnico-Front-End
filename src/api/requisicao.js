@@ -6,7 +6,10 @@ export const requisicao = async (pesquisa, startIndex) => {
     const response = await axios.get(
       `https://www.googleapis.com/books/v1/volumes?q=${pesquisa}&startIndex=${startIndex}`,
     )
-    return response.data.items
+    return {
+      items: response.data.items,
+      totalItems: response.data.totalItems,
+    }
   } catch (error) {
     console.error(error)
     throw error
