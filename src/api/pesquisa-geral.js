@@ -1,4 +1,3 @@
-// req para realizar a pesquisa na api
 import axios from 'axios'
 
 export const pesquisaGeral = async (pesquisa, startIndice, itensPorPagina) => {

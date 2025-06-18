@@ -27,7 +27,7 @@ export default {
   },
 
   mounted() {
-    this.idLivro = this.$route.params.id // captura o id do livro assim que o componente é montado
+    this.idLivro = this.$route.params.id
     this.retornaDetalhesLivro()
   },
 
@@ -64,7 +64,6 @@ export default {
       return this.detalhesLivro.volumeInfo?.description || 'Descrição não encontrada.'
     },
 
-    // verifica se o livro atual já está salvo no state
     ehFavorito() {
       const favoritos = this.$store.getters.retornaFavoritos
       return favoritos.some((livro) => livro.id === this.idLivro)

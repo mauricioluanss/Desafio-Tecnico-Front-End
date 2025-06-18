@@ -10,7 +10,7 @@ const routes = [
     component: PgBuscaLivros,
   },
   {
-    path: '/livro/:id', // : é pra eu joar o id do livro depois
+    path: '/livro/:id',
     name: 'detalhes-livro',
     component: DetalhesCardLivro,
   },
