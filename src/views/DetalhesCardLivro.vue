@@ -90,7 +90,6 @@ export default {
     async retornaDetalhesLivro() {
       try {
         this.detalhesLivro = await pesquisaPorId(this.idLivro)
-        console.log(this.detalhesLivro) //debug
       } catch (erro) {
         console.error(erro)
       }
