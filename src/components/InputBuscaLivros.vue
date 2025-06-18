@@ -1,9 +1,14 @@
 <template>
   <form>
     <h3>PESQUISE O LIVRO</h3>
-    <input class="form-control" type="text" placeholder="Digite 3 letras ou mais: "
-      aria-label="input pra busca do livro" id="floatingInputValue" v-model="input" />
-    <!-- <input v-model="input" type="text" placeholder="Digite 3 letras ou mais: " /> -->
+    <input
+      class="form-control"
+      type="text"
+      placeholder="Digite 3 letras ou mais: "
+      aria-label="input pra busca do livro"
+      id="floatingInputValue"
+      v-model="input"
+    />
 
     <ul>
       <li v-for="livro in livrosEncontrados" :key="livro.id">
@@ -53,7 +58,7 @@ export default {
       clearTimeout(this.searchTimeout)
 
       if (this.input.length > 2) {
-        this.searchTimeout = setTimeout(() => this.consultarLivros(), 400)
+        this.searchTimeout = setTimeout(() => this.consultarLivros(), 200)
       }
     },
   },

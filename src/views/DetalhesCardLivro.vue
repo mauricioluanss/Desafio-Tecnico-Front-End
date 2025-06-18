@@ -1,24 +1,40 @@
 <template>
   <div v-if="detalhesLivro != null">
-    <h1>{{ titulo }}</h1>
-    <img :src="thumbnail" alt="capa do livro" /> <br />
-    autores: {{ autores }} <br />
-    editora: {{ editora }} <br />
-    data de publicação: {{ dataPublicacao }} <br />
-    paginas: {{ numeroPaginas }} <br />
-    categorias : {{ categorias }} <br />
-    descrição: <span v-html="descricao" /> <br />
+    <div class="row">
+      <div class="col-md-4">
+        <h1>{{ titulo }}</h1>
+        <img :src="thumbnail" alt="capa do livro" />
+      </div>
+      <div class="col-md-8 mt-5">
+        autores: {{ autores }} <br />
+        editora: {{ editora }} <br />
+        data de publicação: {{ dataPublicacao }} <br />
+        paginas: {{ numeroPaginas }} <br />
+        categorias : {{ categorias }} <br />
+        descrição: <span v-html="descricao" /> <br />
+      </div>
+    </div>
   </div>
 
   <div>
-    <button @click="favoritar">{{ !ehFavorito ? 'Favoritar' : 'Remover dos favoritos' }}</button>
+    <button type="button" class="btn" @click="favoritar">
+      <IconFavoritoDesabilitado v-if="!ehFavorito" />
+      <IconFavoritoHabilitado v-else />
+    </button>
   </div>
 </template>
 
 <script>
 import { pesquisaPorId } from '@/api/pesquisa-por-id'
+import IconFavoritoDesabilitado from '@/components/icons/IconFavoritoDesabilitado.vue'
+import IconFavoritoHabilitado from '@/components/icons/IconFavoritoHabilitado.vue'
 
 export default {
+  components: {
+    IconFavoritoDesabilitado,
+    IconFavoritoHabilitado,
+  },
+
   data() {
     return {
       idLivro: '',
