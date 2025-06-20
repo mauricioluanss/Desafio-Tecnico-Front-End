@@ -10,6 +10,7 @@
           <RouterLink class="nav-link active" :to="`/livro/${livro.id}`">
             <h5 class="card-title fs-6 text-light">{{ titulo }}</h5>
           </RouterLink>
+
           <p class="card-text">
             <small class="text-white-50">{{ autor }}</small>
           </p>
@@ -34,7 +35,7 @@ export default {
     },
 
     titulo() {
-      return this.livro.volumeInfo?.title?.toUpperCase() || 'Titulo não encontrado'
+      return this.livro.volumeInfo?.title/* ?.toUpperCase() */ || 'Titulo não encontrado'
     },
 
     autor() {
@@ -43,6 +44,7 @@ export default {
   },
 }
 </script>
+
 <style scoped>
 .card {
   height: 140px;
