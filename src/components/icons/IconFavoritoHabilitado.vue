@@ -9,6 +9,7 @@
 svg {
   height: 50px;
   width: 50px;
+  fill: #ffe600;
 }
 
 svg:hover {

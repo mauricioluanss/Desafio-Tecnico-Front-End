@@ -9,8 +9,8 @@ export default {
   props: {
     mensagem: {
       type: String,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 }
 </script>

@@ -9,12 +9,25 @@
       </div>
 
       <div class="col-md-7 mt-5">
-        autores: {{ autores }} <br />
-        editora: {{ editora }} <br />
-        data de publicação: {{ dataPublicacao }} <br />
-        paginas: {{ numeroPaginas }} <br />
-        categorias : {{ categorias }} <br />
-        descrição: <span v-html="descricao" /> <br />
+        <div class="row">
+          <div class="col-md-3">
+            <dt>Autores</dt>
+            <dd>{{ autores }}</dd>
+            <dt>Editora</dt>
+            <dd>{{ editora }}</dd>
+            <dt>Publicação</dt>
+            <dd>{{ dataPublicacao }}</dd>
+            <dt>Paginas</dt>
+            <dd>{{ numeroPaginas }}</dd>
+            <dt>Categorias</dt>
+            <dd>{{ categorias }}</dd>
+          </div>
+
+          <div class="col-md-9">
+            <dt>Descrição</dt>
+            <dd v-html="descricao"></dd>
+          </div>
+        </div>
       </div>
 
       <div class="col-md-1 mt-5">
@@ -23,7 +36,6 @@
           <IconFavoritoHabilitado v-else />
         </button>
       </div>
-
     </div>
   </div>
 </template>
@@ -120,7 +132,7 @@ export default {
       setTimeout(() => {
         this.statusAlertaFavorito = false
       }, 3000)
-    }
+    },
   },
 }
 </script>

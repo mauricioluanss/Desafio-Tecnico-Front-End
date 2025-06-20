@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="d-flex flex-column min-vh-100 text-bg-dark"> <!-- text-bg-dark -->
+  <div id="app" class="d-flex flex-column min-vh-100 text-bg-dark">
     <header>
       <NavBar />
     </header>
@@ -13,15 +13,15 @@
 </template>
 
 <script>
-import { RouterView } from 'vue-router';
+import { RouterView } from 'vue-router'
 import NavBar from '@/components/NavBar.vue'
-import FooterBar from './components/FooterBar.vue';
+import FooterBar from './components/FooterBar.vue'
 
 export default {
   components: {
     RouterView,
     NavBar,
-    FooterBar
+    FooterBar,
   },
 }
 </script>

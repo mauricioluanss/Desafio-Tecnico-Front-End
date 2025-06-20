@@ -1,15 +1,18 @@
 <template>
-  <div class="card mb-3 mt-2" style="max-width: 400px;">
+  <div class="card mb-3 mt-2" style="max-width: 400px">
     <div class="row g-0">
       <div class="col-md-4">
-        <img :src="thumbnail" class="img-fluid rounded-start" alt="capa do livro">
+        <img :src="thumbnail" class="img-fluid rounded-start" alt="capa do livro" />
       </div>
+
       <div class="col-md-8">
         <div class="card-body">
           <RouterLink class="nav-link active" :to="`/livro/${livro.id}`">
             <h5 class="card-title fs-6 text-light">{{ titulo }}</h5>
           </RouterLink>
-          <p class="card-text"><small class="text-white-50">{{ autor }}</small></p>
+          <p class="card-text">
+            <small class="text-white-50">{{ autor }}</small>
+          </p>
         </div>
       </div>
     </div>
@@ -64,6 +67,6 @@ export default {
 small {
   font-size: 12px;
   font-style: italic;
-  line-height: 10q;
+  line-height: 10Q;
 }
 </style>
